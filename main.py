@@ -202,10 +202,37 @@ def todo_junto (j,k,l,matriz):
         else:
             return matriz
 
-#print(todo_junto(0,0,0,[[10,3,7],[10,1,2],[4,6,6]]))
-#print (todo_junto(0,0,0,[[5,3,7],[10,1,2],[4,6,6]]))
-#import numpy as np
-#matriz = np.random.randint(0, 1000000, (20, 20))
-#print(todo_junto(0,0,0,matriz))
-#matriz = np.random.randint(0, 1000000, (50, 50))
-#print(todo_junto(0,0,0,matriz))
+import numpy as np
+import time
+
+
+# Función para medir el tiempo promedio
+def medir_tiempos():
+    tiempos = []
+    
+    for _ in range(1000):
+        # Generamos una nueva matriz
+        matriz = np.random.randint(0, 101, size=(10, 10)).tolist()
+        
+        # Empezamos el cronómetro
+        inicio = time.time()
+        
+        # Ejecutamos la función global
+        todo_junto(0,0,0,matriz)
+        
+        # Calculamos el tiempo que tardó en ejecutarse
+        fin = time.time()
+        
+        # Guardamos el tiempo
+        tiempos.append(fin - inicio)
+    
+    # Calculamos el tiempo promedio
+    tiempo_promedio = np.mean(tiempos)
+    
+    return tiempo_promedio
+
+# Llamamos a la función para medir el tiempo promedio
+tiempo_promedio = medir_tiempos()
+
+# Mostramos el resultado
+print(f"El tiempo medio en resolver las asignaciones es: {tiempo_promedio:.6f} segundos.")
